@@ -1,5 +1,12 @@
 import { Box, Typography, Checkbox } from "@mui/material";
 
+export interface AllTasksProps {
+  taskName?: string;
+  isComplete?: boolean;
+  dateCreated?: null | Date;
+  dateCompleted?: null | Date;
+}
+
 const AllTasks = () => {
   return (
     <Box
