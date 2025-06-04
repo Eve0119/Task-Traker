@@ -26,6 +26,16 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
       createTheme({
         palette: { mode },
         components: {
+          MuiCheckbox: {
+            styleOverrides: {
+              root: {
+                color: mode === "light" ? "#000" : "#fff", // unchecked color (optional)
+                "&.Mui-checked": {
+                  color: mode === "light" ? "#9ca3af" : "#fff", // checked fill color (gray-400)
+                },
+              },
+            },
+          },
           MuiOutlinedInput: {
             styleOverrides: {
               root: {

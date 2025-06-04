@@ -20,6 +20,23 @@ const AllTasks = () => {
       }}
     >
       <Typography variant="h5">All Tasks</Typography>
+      <Box
+        sx={{
+          padding: 2,
+          maxWidth: 900,
+          margin: "0 auto",
+          flexDirection: "column",
+          gap: 1,
+          justifyContent: "center",
+          width: "100%",
+          alignItems: "left",
+          border: "1px solid",
+          borderColor: "divider",
+          borderRadius: 2,
+        }}
+      >
+        <Checkbox />
+      </Box>
     </Box>
   );
 };
