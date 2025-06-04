@@ -1,8 +1,12 @@
 import { AppBar, Toolbar, IconButton, Typography, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import { useContext } from "react";
+import { ThemeContext } from "../theme/ThemeContext";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 export default function Header() {
+  const { toggleTheme, mode } = useContext(ThemeContext);
   return (
     <AppBar
       position="sticky"
@@ -34,15 +38,8 @@ export default function Header() {
           </Box>
         </Box>
 
-        <IconButton
-          sx={{
-            border: "1px solid #e5e7eb",
-            borderRadius: 2,
-            width: 36,
-            height: 36,
-          }}
-        >
-          <LightModeOutlinedIcon fontSize="small" />
+        <IconButton onClick={toggleTheme} color="inherit">
+          {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
       </Toolbar>
     </AppBar>
