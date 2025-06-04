@@ -21,7 +21,33 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
-  const theme = useMemo(() => createTheme({ palette: { mode } }), [mode]);
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: { mode },
+        components: {
+          MuiOutlinedInput: {
+            styleOverrides: {
+              root: {
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: mode === "light" ? "#000" : "#fff",
+                },
+              },
+            },
+          },
+          MuiInputLabel: {
+            styleOverrides: {
+              root: {
+                "&.Mui-focused": {
+                  color: mode === "light" ? "#000" : "#fff",
+                },
+              },
+            },
+          },
+        },
+      }),
+    [mode]
+  );
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, mode }}>

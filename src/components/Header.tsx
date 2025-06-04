@@ -31,6 +31,7 @@ export default function Header() {
         <Box display="flex" alignItems="center" gap={2} paddingLeft={5}>
           <IconButton
             sx={{
+              borderRadius: 1,
               backgroundColor: isDarkMode ? "#ffffff" : "#000000",
               color: isDarkMode ? "#000000" : "#ffffff",
               "&:hover": {
@@ -50,7 +51,16 @@ export default function Header() {
           </Box>
         </Box>
 
-        <IconButton onClick={toggleTheme} color="inherit">
+        <IconButton
+          onClick={toggleTheme}
+          color="inherit"
+          sx={{
+            border: 1,
+            marginRight: 8,
+            borderRadius: 1,
+            borderColor: "divider",
+          }}
+        >
           {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
       </Toolbar>
