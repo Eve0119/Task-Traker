@@ -15,6 +15,7 @@ import { ThemeContext } from "./theme/ThemeContext";
 export default function Header() {
   const { toggleTheme, mode } = useContext(ThemeContext);
   const theme = useTheme();
+  const isDarkMode = mode === "dark";
 
   return (
     <AppBar
@@ -30,9 +31,11 @@ export default function Header() {
         <Box display="flex" alignItems="center" gap={2}>
           <IconButton
             sx={{
-              backgroundColor: "#111827",
-              color: "#fff",
-              "&:hover": { backgroundColor: "#1f2937" },
+              backgroundColor: isDarkMode ? "#ffffff" : "#000000",
+              color: isDarkMode ? "#000000" : "#ffffff",
+              "&:hover": {
+                backgroundColor: isDarkMode ? "#f3f4f6" : "#1f2937", // light gray for dark mode, dark gray for light mode
+              },
             }}
           >
             <MenuIcon />
