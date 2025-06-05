@@ -18,13 +18,27 @@ function App() {
     setTasks((prev) => [...prev, newTask]);
   };
 
+  const toggleTaskCompletion = (id: number) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isComplete: !task.isComplete,
+              dateCompleted: !task.isComplete ? new Date() : null, // Set dateCompleted if task is marked complete
+            }
+          : task
+      )
+    );
+  };
+
   return (
     <>
       <Header />
       {/* Your other components */}
       <main>
         <NewTask onAddTask={addTask} />
-        <AllTasks tasks={tasks} />
+        <AllTasks tasks={tasks} onToggleComplete={toggleTaskCompletion} />
         {/* Add more components here as needed */}
       </main>
     </>

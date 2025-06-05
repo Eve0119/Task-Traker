@@ -1,7 +1,13 @@
 import { Box, Typography, Checkbox, FormControlLabel } from "@mui/material";
 import type { Task } from "../types/type";
 
-const AllTasks = ({ tasks }: { tasks: Task[] }) => {
+const AllTasks = ({
+  tasks,
+  onToggleComplete,
+}: {
+  tasks: Task[];
+  onToggleComplete: (id: number) => void;
+}) => {
   return (
     <Box
       sx={{
@@ -43,7 +49,12 @@ const AllTasks = ({ tasks }: { tasks: Task[] }) => {
               marginRight: 0,
             }}
             key={task.id}
-            control={<Checkbox checked={task.isComplete} />}
+            control={
+              <Checkbox
+                checked={task.isComplete}
+                onChange={() => onToggleComplete(task.id)}
+              />
+            }
             label=""
           />
           <Box>
