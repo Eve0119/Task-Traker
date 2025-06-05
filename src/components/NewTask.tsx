@@ -1,7 +1,17 @@
-import { Box, Button, Typography, TextField, IconButton } from "@mui/material";
+import { Box, Typography, TextField, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { useState } from "react";
 
-const NewTask = () => {
+const NewTask = ({ onAddTask }: { onAddTask: (taskName: string) => void }) => {
+  const [taskInput, setTaskInput] = useState("");
+
+  const handleAdd = () => {
+    if (taskInput.trim() !== "") {
+      onAddTask(taskInput);
+      setTaskInput(""); // Clear the input field after adding the task
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -22,8 +32,15 @@ const NewTask = () => {
     >
       <Typography variant="h5">Add New Task</Typography>
       <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
-        <TextField fullWidth size="small" placeholder="Add a new task..." />
+        <TextField
+          fullWidth
+          size="small"
+          placeholder="Add a new task..."
+          value={taskInput}
+          onChange={(e) => setTaskInput(e.target.value)}
+        />
         <IconButton
+          onClick={handleAdd}
           sx={{
             backgroundColor: "grey.500",
             color: "white",
