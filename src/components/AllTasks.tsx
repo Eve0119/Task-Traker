@@ -1,13 +1,7 @@
-import { Box, Typography, Checkbox } from "@mui/material";
+import { Box, Typography, Checkbox, FormControlLabel } from "@mui/material";
+import type { Task } from "../types/type";
 
-export interface AllTasksProps {
-  taskName?: string;
-  isComplete?: boolean;
-  dateCreated?: null | Date;
-  dateCompleted?: null | Date;
-}
-
-const AllTasks = () => {
+const AllTasks = ({ tasks }: { tasks: Task[] }) => {
   return (
     <Box
       sx={{
@@ -21,29 +15,36 @@ const AllTasks = () => {
         borderRadius: 2,
         borderColor: "divider",
         marginTop: 4,
-        height: "20vh",
+        minHeightheight: "20vh",
         alignItems: "left",
         justifyContent: "center",
       }}
     >
       <Typography variant="h5">All Tasks</Typography>
-      <Box
-        sx={{
-          padding: 2,
-          maxWidth: 900,
-          margin: "0 auto",
-          flexDirection: "column",
-          gap: 1,
-          justifyContent: "center",
-          width: "100%",
-          alignItems: "left",
-          border: "1px solid",
-          borderColor: "divider",
-          borderRadius: 2,
-        }}
-      >
-        <Checkbox />
-      </Box>
+      {tasks.map((task) => (
+        <Box
+          sx={{
+            padding: 2,
+            maxWidth: 900,
+            margin: "0 auto",
+            flexDirection: "column",
+            display: "flex",
+            gap: 1,
+            justifyContent: "center",
+            width: "100%",
+            alignItems: "left",
+            border: "1px solid",
+            borderColor: "divider",
+            borderRadius: 2,
+          }}
+        >
+          <FormControlLabel
+            key={task.id}
+            control={<Checkbox checked={task.isComplete} />}
+            label={task.taskName}
+          />
+        </Box>
+      ))}
     </Box>
   );
 };
