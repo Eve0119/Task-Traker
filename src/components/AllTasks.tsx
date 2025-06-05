@@ -27,10 +27,10 @@ const AllTasks = ({ tasks }: { tasks: Task[] }) => {
             padding: 2,
             maxWidth: 900,
             margin: "0 auto",
-            flexDirection: "column",
+            flexDirection: "row",
             display: "flex",
-            gap: 1,
-            justifyContent: "center",
+            gap: 0,
+            justifyContent: "flex-start",
             width: "100%",
             alignItems: "left",
             border: "1px solid",
@@ -39,10 +39,29 @@ const AllTasks = ({ tasks }: { tasks: Task[] }) => {
           }}
         >
           <FormControlLabel
+            sx={{
+              marginRight: 0,
+            }}
             key={task.id}
             control={<Checkbox checked={task.isComplete} />}
-            label={task.taskName}
+            label=""
           />
+          <Box>
+            <Typography variant="body1">{task.taskName}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              {task.dateCreated && task.dateCompleted
+                ? `Created on: ${new Date(
+                    task.dateCreated
+                  ).toLocaleDateString()} | Completed on: ${new Date(
+                    task.dateCompleted
+                  ).toLocaleDateString()}`
+                : task.dateCreated
+                ? `Created on: ${new Date(
+                    task.dateCreated
+                  ).toLocaleDateString()}`
+                : "No date information available"}
+            </Typography>
+          </Box>
         </Box>
       ))}
     </Box>
