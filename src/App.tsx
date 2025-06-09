@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/Header";
 import NewTask from "./components/NewTask";
 import AllTasks from "./components/AllTasks";
+import FilterTasks from "./components/FilterTasks";
 import type { Task } from "./types/type";
 
 function App() {
@@ -39,15 +40,14 @@ function App() {
   return (
     <>
       <Header />
-      {/* Your other components */}
       <main>
         <NewTask onAddTask={addTask} />
+        <FilterTasks />
         <AllTasks
           tasks={tasks}
           onToggleComplete={toggleTaskCompletion}
           clearCompletedTasks={clearCompletedTasks}
         />
-        {/* Add more components here as needed */}
       </main>
     </>
   );
