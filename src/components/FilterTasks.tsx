@@ -5,6 +5,7 @@ import {
   InputAdornment,
   ToggleButton,
   ToggleButtonGroup,
+  useTheme,
 } from "@mui/material";
 import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
@@ -12,6 +13,9 @@ import SearchIcon from "@mui/icons-material/Search";
 const FilterTasks = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <Box
       sx={{
@@ -48,8 +52,9 @@ const FilterTasks = () => {
       />
       <Box
         sx={{
-          backgroundColor: "#f4f7fb",
-          borderRadius: 3,
+          //   backgroundColor: isDark ? "#0B1220" : "grey.100",
+          backgroundColor: isDark ? "grey.700" : "grey.100",
+          borderRadius: 2,
           padding: 1,
           display: "flex",
           justifyContent: "center",
@@ -57,7 +62,7 @@ const FilterTasks = () => {
           width: "100%",
           maxWidth: 1000,
           margin: "0 auto",
-          maxHeight: "40px",
+          maxHeight: "35px",
         }}
       >
         <ToggleButtonGroup
@@ -75,7 +80,7 @@ const FilterTasks = () => {
             justifyContent: "space-around",
             "& .MuiToggleButton-root": {
               border: "none",
-              borderRadius: "12px",
+              borderRadius: "7px",
               flex: 1,
               padding: "4px 16px",
               display: "flex",
@@ -84,12 +89,12 @@ const FilterTasks = () => {
               gap: 1,
               textTransform: "none",
               fontWeight: "bold",
-              color: "#000",
+              color: isDark ? "#fff" : "#000",
               backgroundColor: "transparent",
             },
             "& .Mui-selected": {
-              backgroundColor: "#0c1220",
-              color: "#fff",
+              backgroundColor: isDark ? "#fff" : "#0c1220",
+              color: isDark ? "#000" : "#fff",
               "& .MuiChip-root": {
                 backgroundColor: "#3c445c",
                 color: "#fff",
