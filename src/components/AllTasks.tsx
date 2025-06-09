@@ -1,12 +1,21 @@
-import { Box, Typography, Checkbox, FormControlLabel } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Checkbox,
+  FormControlLabel,
+  Button,
+} from "@mui/material";
 import type { Task } from "../types/type";
+import { Icon } from "@iconify/react";
 
 const AllTasks = ({
   tasks,
   onToggleComplete,
+  clearCompletedTasks,
 }: {
   tasks: Task[];
   onToggleComplete: (id: number) => void;
+  clearCompletedTasks: () => void;
 }) => {
   return (
     <Box
@@ -14,7 +23,7 @@ const AllTasks = ({
         padding: 3,
         display: "flex",
         flexDirection: "column",
-        gap: 2,
+        gap: 1,
         border: "1px solid",
         margin: "0 auto",
         maxWidth: 900,
@@ -26,7 +35,9 @@ const AllTasks = ({
         justifyContent: "center",
       }}
     >
-      <Typography variant="h5">All Tasks</Typography>
+      <Typography variant="h5" marginBottom={1}>
+        All Tasks
+      </Typography>
       {tasks.map((task) => (
         <Box
           sx={{
@@ -75,6 +86,28 @@ const AllTasks = ({
           </Box>
         </Box>
       ))}
+      <Button
+        sx={{
+          maxWidth: 200,
+          border: 1,
+          borderColor: "rgba(145, 52, 52, 0.2)",
+          borderRadius: 2,
+          color: "red",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          margin: "0 auto",
+          marginTop: 2,
+          gap: 2,
+        }}
+        onClick={clearCompletedTasks}
+        disabled={tasks.filter((task) => task.isComplete).length === 0}
+      >
+        <Icon icon="mdi:trash-can" fontSize={20} />
+        <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+          Clear Completed
+        </Typography>
+      </Button>
     </Box>
   );
 };
