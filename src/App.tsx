@@ -32,13 +32,21 @@ function App() {
     );
   };
 
+  const clearCompletedTasks = () => {
+    setTasks((prevTasks) => prevTasks.filter((task) => !task.isComplete));
+  };
+
   return (
     <>
       <Header />
       {/* Your other components */}
       <main>
         <NewTask onAddTask={addTask} />
-        <AllTasks tasks={tasks} onToggleComplete={toggleTaskCompletion} />
+        <AllTasks
+          tasks={tasks}
+          onToggleComplete={toggleTaskCompletion}
+          clearCompletedTasks={clearCompletedTasks}
+        />
         {/* Add more components here as needed */}
       </main>
     </>
