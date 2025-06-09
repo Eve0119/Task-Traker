@@ -69,7 +69,18 @@ const AllTasks = ({
             label=""
           />
           <Box>
-            <Typography variant="body1">{task.taskName}</Typography>
+            {task.isComplete ? (
+              <Typography
+                sx={{ textDecoration: "line-through" }}
+                variant="body1"
+                color="textSecondary"
+              >
+                {task.taskName}
+              </Typography>
+            ) : (
+              <Typography variant="body1">{task.taskName}</Typography>
+            )}
+
             <Typography variant="body2" color="textSecondary">
               {task.dateCreated && task.dateCompleted
                 ? `Created on: ${new Date(
