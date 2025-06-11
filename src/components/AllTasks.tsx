@@ -77,7 +77,7 @@ const AllTasks = ({
         </Box>
       ) : (
         <>
-          {filteredTasks.map((task) => (
+          {[...filteredTasks].reverse().map((task) => (
             <Box
               sx={{
                 padding: 2,
