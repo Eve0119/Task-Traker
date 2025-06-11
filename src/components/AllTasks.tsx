@@ -12,11 +12,29 @@ const AllTasks = ({
   tasks,
   onToggleComplete,
   clearCompletedTasks,
+  search,
+  filter,
 }: {
   tasks: Task[];
   onToggleComplete: (id: number) => void;
   clearCompletedTasks: () => void;
+  search: string;
+  filter: "all" | "active" | "completed";
 }) => {
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch = task.taskName
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesFilter =
+      filter === "all"
+        ? true
+        : filter === "active"
+        ? !task.isComplete
+        : task.isComplete;
+
+    return matchesSearch && matchesFilter;
+  });
   return (
     <Box
       sx={{
@@ -38,7 +56,7 @@ const AllTasks = ({
       <Typography variant="h5" marginBottom={1}>
         All Tasks
       </Typography>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <Box
           sx={{
             padding: 2,

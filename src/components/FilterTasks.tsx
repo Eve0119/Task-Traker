@@ -7,12 +7,16 @@ import {
   ToggleButtonGroup,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import type { FilterTasksProps } from "../types/type";
+export type { FilterTasksProps } from "../types/type";
 
-const FilterTasks = () => {
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all");
+const FilterTasks = ({
+  filter,
+  search,
+  setFilter,
+  setSearch,
+}: FilterTasksProps) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -93,12 +97,12 @@ const FilterTasks = () => {
               backgroundColor: "transparent",
             },
             "& .Mui-selected": {
-              backgroundColor: isDark ? "#fff" : "#0c1220",
+              backgroundColor: isDark ? "white" : "#000",
               color: isDark ? "#000" : "#fff",
-              "& .MuiChip-root": {
-                backgroundColor: "#3c445c",
-                color: "#fff",
-              },
+              // "& .MuiChip-root": {
+              //   backgroundColor: "#3c445c",
+              //   color: "#fff",
+              // },
             },
           }}
         >
