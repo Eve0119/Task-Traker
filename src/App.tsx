@@ -7,6 +7,8 @@ import type { Task } from "./types/type";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+  const [search, setSearch] = useState("");
 
   const addTask = (taskName: string) => {
     const newTask: Task = {
@@ -42,9 +44,16 @@ function App() {
       <Header />
       <main>
         <NewTask onAddTask={addTask} />
-        <FilterTasks />
+        <FilterTasks
+          search={search}
+          setSearch={setSearch}
+          filter={filter}
+          setFilter={setFilter}
+        />
         <AllTasks
           tasks={tasks}
+          filter={filter}
+          search={search}
           onToggleComplete={toggleTaskCompletion}
           clearCompletedTasks={clearCompletedTasks}
         />
