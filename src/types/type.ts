@@ -12,3 +12,9 @@ export interface FilterTasksProps {
   filter: "all" | "active" | "completed";
   setFilter: (filter: "all" | "active" | "completed") => void;
 }
+
+export interface Banner {
+  all: number;
+  active: number;
+  completed: number;
+}

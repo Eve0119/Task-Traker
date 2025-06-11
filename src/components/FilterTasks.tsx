@@ -106,9 +106,63 @@ const FilterTasks = ({
             },
           }}
         >
-          <ToggleButton value="all">All</ToggleButton>
-          <ToggleButton value="active">Active</ToggleButton>
-          <ToggleButton value="completed">Completed</ToggleButton>
+          <ToggleButton value="all">
+            All
+            <Box
+              sx={{
+                backgroundColor: isDark ? "#2C3141" : "#e0e0e0",
+                color: isDark ? "white" : "#000",
+                fontSize: 12,
+                px: 1,
+                borderRadius: "50%",
+                maxWidth: 18,
+                height: 19,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              1
+            </Box>
+          </ToggleButton>
+          <ToggleButton value="active">
+            Active
+            <Box
+              sx={{
+                backgroundColor: isDark ? "#2C3141" : "#e0e0e0",
+                color: isDark ? "white" : "#000",
+                fontSize: 12,
+                px: 1,
+                borderRadius: "50%",
+                maxWidth: 18,
+                height: 19,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              1
+            </Box>
+          </ToggleButton>
+          <ToggleButton value="completed">
+            Completed
+            <Box
+              sx={{
+                backgroundColor: isDark ? "#2C3141" : "#e0e0e0",
+                color: isDark ? "white" : "#000",
+                fontSize: 12,
+                px: 1,
+                borderRadius: "50%",
+                maxWidth: 18,
+                height: 19,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              1
+            </Box>
+          </ToggleButton>
         </ToggleButtonGroup>
       </Box>
     </Box>
