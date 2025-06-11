@@ -26,12 +26,34 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
       createTheme({
         palette: { mode },
         components: {
+          MuiToggleButton: {
+            styleOverrides: {
+              root: {
+                border: "none",
+                borderRadius: "7px",
+                flex: 1,
+                padding: "4px 16px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "8px",
+                textTransform: "none",
+                fontWeight: "bold",
+                backgroundColor: "transparent",
+                color: mode === "light" ? "#000" : "#fff",
+                "&.Mui-selected": {
+                  backgroundColor: mode === "light" ? "#000" : "#fff",
+                  color: mode === "light" ? "#fff" : "#000",
+                },
+              },
+            },
+          },
           MuiCheckbox: {
             styleOverrides: {
               root: {
-                color: mode === "light" ? "#000" : "#fff", // unchecked color (optional)
+                color: mode === "light" ? "#000" : "#fff",
                 "&.Mui-checked": {
-                  color: mode === "light" ? "#9ca3af" : "#fff", // checked fill color (gray-400)
+                  color: mode === "light" ? "#9ca3af" : "#fff",
                 },
               },
             },

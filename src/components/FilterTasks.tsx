@@ -5,7 +5,6 @@ import {
   InputAdornment,
   ToggleButton,
   ToggleButtonGroup,
-  useTheme,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import type { FilterTasksProps } from "../types/type";
@@ -18,9 +17,6 @@ const FilterTasks = ({
   setSearch,
   banner,
 }: FilterTasksProps) => {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
-
   return (
     <Box
       sx={{
@@ -55,10 +51,13 @@ const FilterTasks = ({
           ),
         }}
       />
+
       <Box
-        sx={{
-          //   backgroundColor: isDark ? "#0B1220" : "grey.100",
-          backgroundColor: isDark ? "grey.700" : "grey.100",
+        sx={(theme) => ({
+          backgroundColor:
+            theme.palette.mode === "dark"
+              ? theme.palette.grey[700]
+              : theme.palette.grey[100],
           borderRadius: 2,
           padding: 1,
           display: "flex",
@@ -68,7 +67,7 @@ const FilterTasks = ({
           maxWidth: 1000,
           margin: "0 auto",
           maxHeight: "35px",
-        }}
+        })}
       >
         <ToggleButtonGroup
           value={filter}
@@ -79,7 +78,7 @@ const FilterTasks = ({
             }
           }}
           aria-label="task filter"
-          sx={{
+          sx={(theme) => ({
             display: "flex",
             width: "100%",
             justifyContent: "space-around",
@@ -94,76 +93,41 @@ const FilterTasks = ({
               gap: 1,
               textTransform: "none",
               fontWeight: "bold",
-              color: isDark ? "#fff" : "#000",
+              color: theme.palette.mode === "dark" ? "#fff" : "#000",
               backgroundColor: "transparent",
             },
             "& .Mui-selected": {
-              backgroundColor: isDark ? "white" : "#000",
-              color: isDark ? "#000" : "#fff",
+              backgroundColor: theme.palette.mode === "dark" ? "#fff" : "#000",
+              color: theme.palette.mode === "dark" ? "#000" : "#fff",
               "& .MuiChip-root": {
                 backgroundColor: "#3c445c",
                 color: "#fff",
               },
             },
-          }}
+          })}
         >
-          <ToggleButton value="all">
-            All
-            <Box
-              sx={{
-                backgroundColor: isDark ? "#2C3141" : "#e0e0e0",
-                color: isDark ? "white" : "#000",
-                fontSize: 12,
-                px: 1,
-                borderRadius: "50%",
-                maxWidth: 18,
-                height: 19,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {banner.all}
-            </Box>
-          </ToggleButton>
-          <ToggleButton value="active">
-            Active
-            <Box
-              sx={{
-                backgroundColor: isDark ? "#2C3141" : "#e0e0e0",
-                color: isDark ? "white" : "#000",
-                fontSize: 12,
-                px: 1,
-                borderRadius: "50%",
-                maxWidth: 18,
-                height: 19,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {banner.active}
-            </Box>
-          </ToggleButton>
-          <ToggleButton value="completed">
-            Completed
-            <Box
-              sx={{
-                backgroundColor: isDark ? "#2C3141" : "#e0e0e0",
-                color: isDark ? "white" : "#000",
-                fontSize: 12,
-                px: 1,
-                borderRadius: "50%",
-                maxWidth: 18,
-                height: 19,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {banner.completed}
-            </Box>
-          </ToggleButton>
+          {["all", "active", "completed"].map((status) => (
+            <ToggleButton key={status} value={status}>
+              {status.charAt(0).toUpperCase() + status.slice(1)}
+              <Box
+                sx={(theme) => ({
+                  backgroundColor:
+                    theme.palette.mode === "dark" ? "#2C3141" : "#e0e0e0",
+                  color: theme.palette.mode === "dark" ? "#fff" : "#000",
+                  fontSize: 12,
+                  px: 1,
+                  borderRadius: "50%",
+                  maxWidth: 18,
+                  height: 19,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                })}
+              >
+                {banner[status as keyof typeof banner]}
+              </Box>
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
       </Box>
     </Box>
