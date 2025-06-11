@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import NewTask from "./components/NewTask";
 import AllTasks from "./components/AllTasks";
 import FilterTasks from "./components/FilterTasks";
 import type { Task } from "./types/type";
+import type { Banner } from "./types/type";
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
   const [search, setSearch] = useState("");
+  const [banner, setBanner] = useState<Banner>({
+    all: 0,
+    active: 0,
+    completed: 0,
+  });
 
   const addTask = (taskName: string) => {
     const newTask: Task = {
@@ -39,6 +45,14 @@ function App() {
     setTasks((prevTasks) => prevTasks.filter((task) => !task.isComplete));
   };
 
+  useEffect(() => {
+    setBanner({
+      all: tasks.length,
+      active: tasks.filter((task) => !task.isComplete).length,
+      completed: tasks.filter((task) => task.isComplete).length,
+    });
+  }, [tasks]);
+
   return (
     <>
       <Header />
@@ -49,6 +63,7 @@ function App() {
           setSearch={setSearch}
           filter={filter}
           setFilter={setFilter}
+          banner={banner}
         />
         <AllTasks
           tasks={tasks}

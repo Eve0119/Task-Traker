@@ -1,3 +1,4 @@
+
 export interface Task {
   id: number;
   taskName: string;
@@ -11,6 +12,7 @@ export interface FilterTasksProps {
   setSearch: (search: string) => void;
   filter: "all" | "active" | "completed";
   setFilter: (filter: "all" | "active" | "completed") => void;
+  banner: Banner;
 }
 
 export interface Banner {

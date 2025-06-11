@@ -16,6 +16,7 @@ const FilterTasks = ({
   search,
   setFilter,
   setSearch,
+  banner,
 }: FilterTasksProps) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -99,10 +100,10 @@ const FilterTasks = ({
             "& .Mui-selected": {
               backgroundColor: isDark ? "white" : "#000",
               color: isDark ? "#000" : "#fff",
-              // "& .MuiChip-root": {
-              //   backgroundColor: "#3c445c",
-              //   color: "#fff",
-              // },
+              "& .MuiChip-root": {
+                backgroundColor: "#3c445c",
+                color: "#fff",
+              },
             },
           }}
         >
@@ -122,7 +123,7 @@ const FilterTasks = ({
                 justifyContent: "center",
               }}
             >
-              1
+              {banner.all}
             </Box>
           </ToggleButton>
           <ToggleButton value="active">
@@ -141,7 +142,7 @@ const FilterTasks = ({
                 justifyContent: "center",
               }}
             >
-              1
+              {banner.active}
             </Box>
           </ToggleButton>
           <ToggleButton value="completed">
@@ -160,7 +161,7 @@ const FilterTasks = ({
                 justifyContent: "center",
               }}
             >
-              1
+              {banner.completed}
             </Box>
           </ToggleButton>
         </ToggleButtonGroup>
