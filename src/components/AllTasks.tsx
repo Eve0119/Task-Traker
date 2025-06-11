@@ -56,87 +56,114 @@ const AllTasks = ({
       <Typography variant="h5" marginBottom={1}>
         All Tasks
       </Typography>
-      {filteredTasks.map((task) => (
+      {filteredTasks.length === 0 ? (
         <Box
           sx={{
-            padding: 2,
-            maxWidth: 900,
-            margin: "0 auto",
-            flexDirection: "row",
+            textAlign: "center",
+            marginTop: 2,
             display: "flex",
-            gap: 0,
-            justifyContent: "flex-start",
-            width: "100%",
-            alignItems: "left",
-            border: "1px solid",
-            borderColor: "divider",
-            borderRadius: 2,
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 2,
           }}
         >
-          <FormControlLabel
-            sx={{
-              marginRight: 0,
-            }}
-            key={task.id}
-            control={
-              <Checkbox
-                checked={task.isComplete}
-                onChange={() => onToggleComplete(task.id)}
-              />
-            }
-            label=""
+          <Icon
+            icon="mdi:folder-open-outline"
+            fontSize={50}
+            color="textSecondary"
           />
-          <Box>
-            {task.isComplete ? (
-              <Typography
-                sx={{ textDecoration: "line-through" }}
-                variant="body1"
-                color="textSecondary"
-              >
-                {task.taskName}
-              </Typography>
-            ) : (
-              <Typography variant="body1">{task.taskName}</Typography>
-            )}
-
-            <Typography variant="body2" color="textSecondary">
-              {task.dateCreated && task.dateCompleted
-                ? `Created on: ${new Date(
-                    task.dateCreated
-                  ).toLocaleDateString()} | Completed on: ${new Date(
-                    task.dateCompleted
-                  ).toLocaleDateString()}`
-                : task.dateCreated
-                ? `Created on: ${new Date(
-                    task.dateCreated
-                  ).toLocaleDateString()}`
-                : "No date information available"}
-            </Typography>
-          </Box>
+          <Typography variant="h6" color="textSecondary">
+            Hooray! No tasks
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Add a task above to get started
+          </Typography>
         </Box>
-      ))}
-      <Button
-        sx={{
-          maxWidth: 200,
-          border: 1,
-          borderColor: "rgba(145, 52, 52, 0.2)",
-          borderRadius: 2,
-          color: "red",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "0 auto",
-          marginTop: 2,
-          gap: 2,
-        }}
-        onClick={clearCompletedTasks}
-        disabled={tasks.filter((task) => task.isComplete).length === 0}
-      >
-        <Icon icon="mdi:trash-can" fontSize={20} />
-        <Typography variant="body2" sx={{ fontWeight: "bold" }}>
-          Clear Completed
-        </Typography>
-      </Button>
+      ) : (
+        <>
+          {filteredTasks.map((task) => (
+            <Box
+              sx={{
+                padding: 2,
+                maxWidth: 900,
+                margin: "0 auto",
+                flexDirection: "row",
+                display: "flex",
+                gap: 0,
+                justifyContent: "flex-start",
+                width: "100%",
+                alignItems: "left",
+                border: "1px solid",
+                borderColor: "divider",
+                borderRadius: 2,
+              }}
+            >
+              <FormControlLabel
+                sx={{
+                  marginRight: 0,
+                }}
+                key={task.id}
+                control={
+                  <Checkbox
+                    checked={task.isComplete}
+                    onChange={() => onToggleComplete(task.id)}
+                  />
+                }
+                label=""
+              />
+              <Box>
+                {task.isComplete ? (
+                  <Typography
+                    sx={{ textDecoration: "line-through" }}
+                    variant="body1"
+                    color="textSecondary"
+                  >
+                    {task.taskName}
+                  </Typography>
+                ) : (
+                  <Typography variant="body1">{task.taskName}</Typography>
+                )}
+
+                <Typography variant="body2" color="textSecondary">
+                  {task.dateCreated && task.dateCompleted
+                    ? `Created on: ${new Date(
+                        task.dateCreated
+                      ).toLocaleDateString()} | Completed on: ${new Date(
+                        task.dateCompleted
+                      ).toLocaleDateString()}`
+                    : task.dateCreated
+                    ? `Created on: ${new Date(
+                        task.dateCreated
+                      ).toLocaleDateString()}`
+                    : "No date information available"}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+          <Button
+            sx={{
+              maxWidth: 200,
+              border: 1,
+              borderColor: "rgba(145, 52, 52, 0.2)",
+              borderRadius: 2,
+              color: "red",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto",
+              marginTop: 2,
+              gap: 2,
+            }}
+            onClick={clearCompletedTasks}
+            disabled={tasks.filter((task) => task.isComplete).length === 0}
+          >
+            <Icon icon="mdi:trash-can" fontSize={20} />
+            <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+              Clear Completed
+            </Typography>
+          </Button>
+        </>
+      )}
     </Box>
   );
 };
