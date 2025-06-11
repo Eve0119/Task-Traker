@@ -67,11 +67,7 @@ const AllTasks = ({
             gap: 2,
           }}
         >
-          <Icon
-            icon="mdi:folder-open-outline"
-            fontSize={50}
-            color="textSecondary"
-          />
+          <Icon icon="mdi:party-popper" fontSize={50} color="textSecondary" />
           <Typography variant="h6" color="textSecondary">
             Hooray! No tasks
           </Typography>
