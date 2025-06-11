@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import type { FilterTasksProps } from "../types/type";
-export type { FilterTasksProps } from "../types/type";
 
 const FilterTasks = ({
   filter,
