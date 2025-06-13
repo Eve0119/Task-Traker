@@ -159,10 +159,18 @@ const AllTasks = ({
                 }}
               >
                 <IconButton>
-                  <Icon icon="mdi:edit" fontSize="medium" color="blue" />
+                  <Icon
+                    icon="mdi:edit"
+                    fontSize="medium"
+                    color="textsecondary"
+                  />
                 </IconButton>
                 <IconButton>
-                  <Icon icon="mdi:delete" fontSize="medium" color="red" />
+                  <Icon
+                    icon="mdi:delete"
+                    fontSize="medium"
+                    color="textsecondary"
+                  />
                 </IconButton>
               </Box>
             </Box>
