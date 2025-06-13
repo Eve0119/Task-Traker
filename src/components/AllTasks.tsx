@@ -141,7 +141,7 @@ const AllTasks = ({
                     flex: 1,
                     display: "flex",
                     alignItems: "center",
-                    gap: 1,
+                    gap: 0,
                   }}
                 >
                   <TextField
@@ -150,14 +150,11 @@ const AllTasks = ({
                     value={editedTaskName}
                     onChange={(e) => setEditedTaskName(e.target.value)}
                   />
-                  <IconButton
-                    onClick={() => saveEditedTask(task)}
-                    color="success"
-                  >
-                    <Icon icon="mdi:check" />
+                  <IconButton onClick={() => saveEditedTask(task)}>
+                    <Icon icon="mdi:check" color="textsecondary" />
                   </IconButton>
-                  <IconButton onClick={cancelEditing} color="error">
-                    <Icon icon="mdi:close" />
+                  <IconButton onClick={cancelEditing}>
+                    <Icon icon="mdi:close" color="textsecondary" />
                   </IconButton>
                 </Box>
               ) : (
