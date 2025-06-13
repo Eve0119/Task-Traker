@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import NewTask from "./components/NewTask";
 import AllTasks from "./components/AllTasks";
 import FilterTasks from "./components/FilterTasks";
+import Progress from "./components/Progress";
 import type { Task } from "./types/type";
 import type { Banner } from "./types/type";
 
@@ -69,6 +70,11 @@ function App() {
     <>
       <Header />
       <main>
+        <Progress
+          total={banner.all}
+          completed={banner.completed}
+          active={banner.active}
+        />
         <NewTask onAddTask={addTask} />
         <FilterTasks
           search={search}

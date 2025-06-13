@@ -20,3 +20,9 @@ export interface Banner {
   active: number;
   completed: number;
 }
+
+export interface ProgressProps {
+  total: number;
+  completed: number;
+  active: number;
+}
