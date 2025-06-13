@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Eve0119.github.io/Task-Tracker",
   "name": "app",
   "private": true,
   "version": "0.0.0",
@@ -8,9 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@iconify/react": "^6.0.0",
