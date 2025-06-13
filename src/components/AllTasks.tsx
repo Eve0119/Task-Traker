@@ -4,6 +4,7 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
+  IconButton,
 } from "@mui/material";
 import type { Task } from "../types/type";
 import { Icon } from "@iconify/react";
@@ -97,6 +98,11 @@ const AllTasks = ({
                 border: "1px solid",
                 borderColor: "divider",
                 borderRadius: 2,
+                position: "relative",
+                "&:hover .task-actions": {
+                  opacity: 1,
+                },
+                transition: "0.2s ease",
               }}
             >
               <FormControlLabel
@@ -138,6 +144,26 @@ const AllTasks = ({
                       ).toLocaleDateString()}`
                     : "No date information available"}
                 </Typography>
+              </Box>
+              <Box
+                className="task-actions"
+                sx={{
+                  position: "absolute",
+                  right: 20,
+                  display: "flex",
+                  gap: 0,
+                  opacity: 0,
+                  transition: "opacity 0.2s ease-in-out",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
+              >
+                <IconButton>
+                  <Icon icon="mdi:edit" fontSize="medium" color="blue" />
+                </IconButton>
+                <IconButton>
+                  <Icon icon="mdi:delete" fontSize="medium" color="red" />
+                </IconButton>
               </Box>
             </Box>
           ))}
