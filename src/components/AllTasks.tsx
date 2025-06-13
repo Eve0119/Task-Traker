@@ -253,7 +253,7 @@ const AllTasks = ({
           >
             <Icon icon="mdi:trash-can" fontSize={20} />
             <Typography variant="body2" sx={{ fontWeight: "bold" }}>
-              Clear Completed
+              Clear Completed!
             </Typography>
           </Button>
         </>
