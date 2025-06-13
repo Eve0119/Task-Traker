@@ -54,7 +54,11 @@ const AllTasks = ({
       }}
     >
       <Typography variant="h5" marginBottom={1}>
-        All Tasks
+        {filter === "all"
+          ? "All Tasks"
+          : filter === "active"
+          ? "Active Tasks"
+          : "Completed Tasks"}
       </Typography>
       {filteredTasks.length === 0 ? (
         <Box
