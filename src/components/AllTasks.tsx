@@ -104,7 +104,7 @@ const AllTasks = ({
         >
           <Icon icon="mdi:party-popper" fontSize={50} color="textSecondary" />
           <Typography variant="h6" color="textSecondary">
-            Hooray! No tasks
+            Hooray! No task
           </Typography>
           <Typography variant="body2" color="textSecondary">
             Add a task above to get started
