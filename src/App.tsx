@@ -27,6 +27,18 @@ function App() {
     setTasks((prev) => [...prev, newTask]);
   };
 
+  const editTask = (id: number, updatedTaskName: string) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, taskName: updatedTaskName } : task
+      )
+    );
+  };
+
+  const deleteTask = (id: number) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
+
   const toggleTaskCompletion = (id: number) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -71,6 +83,8 @@ function App() {
           search={search}
           onToggleComplete={toggleTaskCompletion}
           clearCompletedTasks={clearCompletedTasks}
+          editTask={editTask}
+          deleteTask={deleteTask}
         />
       </main>
     </>

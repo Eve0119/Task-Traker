@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -5,6 +6,7 @@ import {
   FormControlLabel,
   Button,
   IconButton,
+  TextField,
 } from "@mui/material";
 import type { Task } from "../types/type";
 import { Icon } from "@iconify/react";
@@ -13,15 +15,41 @@ const AllTasks = ({
   tasks,
   onToggleComplete,
   clearCompletedTasks,
+  editTask,
+  deleteTask,
   search,
   filter,
 }: {
   tasks: Task[];
   onToggleComplete: (id: number) => void;
   clearCompletedTasks: () => void;
+  editTask: (id: number, updatedTaskName: string) => void;
+  deleteTask: (id: number) => void;
   search: string;
   filter: "all" | "active" | "completed";
 }) => {
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [editedTaskName, setEditedTaskName] = useState("");
+
+  const startEditing = (task: Task) => {
+    setEditingTaskId(task.id);
+    setEditedTaskName(task.taskName);
+  };
+
+  const cancelEditing = () => {
+    setEditingTaskId(null);
+    setEditedTaskName("");
+  };
+
+  const saveEditedTask = (task: Task) => {
+    if (editedTaskName.trim() === "") {
+      cancelEditing();
+    } else {
+      editTask(task.id, editedTaskName);
+    }
+    setEditingTaskId(null);
+  };
+
   const filteredTasks = tasks.filter((task) => {
     const matchesSearch = task.taskName
       .toLowerCase()
@@ -36,6 +64,7 @@ const AllTasks = ({
 
     return matchesSearch && matchesFilter;
   });
+
   return (
     <Box
       sx={{
@@ -105,74 +134,106 @@ const AllTasks = ({
                 transition: "0.2s ease",
               }}
             >
-              <FormControlLabel
-                sx={{
-                  marginRight: 0,
-                }}
-                key={task.id}
-                control={
-                  <Checkbox
-                    checked={task.isComplete}
-                    onChange={() => onToggleComplete(task.id)}
+              {editingTaskId === task.id ? (
+                // --- Edit Mode
+                <Box
+                  sx={{
+                    flex: 1,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  <TextField
+                    fullWidth
+                    size="small"
+                    value={editedTaskName}
+                    onChange={(e) => setEditedTaskName(e.target.value)}
                   />
-                }
-                label=""
-              />
-              <Box>
-                {task.isComplete ? (
-                  <Typography
-                    sx={{ textDecoration: "line-through" }}
-                    variant="body1"
-                    color="textSecondary"
+                  <IconButton
+                    onClick={() => saveEditedTask(task)}
+                    color="success"
                   >
-                    {task.taskName}
-                  </Typography>
-                ) : (
-                  <Typography variant="body1">{task.taskName}</Typography>
-                )}
+                    <Icon icon="mdi:check" />
+                  </IconButton>
+                  <IconButton onClick={cancelEditing} color="error">
+                    <Icon icon="mdi:close" />
+                  </IconButton>
+                </Box>
+              ) : (
+                <>
+                  <FormControlLabel
+                    sx={{
+                      marginRight: 0,
+                    }}
+                    key={task.id}
+                    control={
+                      <Checkbox
+                        checked={task.isComplete}
+                        onChange={() => onToggleComplete(task.id)}
+                      />
+                    }
+                    label=""
+                  />
+                  <Box>
+                    {task.isComplete ? (
+                      <Typography
+                        sx={{ textDecoration: "line-through" }}
+                        variant="body1"
+                        color="textSecondary"
+                      >
+                        {task.taskName}
+                      </Typography>
+                    ) : (
+                      <Typography variant="body1">{task.taskName}</Typography>
+                    )}
 
-                <Typography variant="body2" color="textSecondary">
-                  {task.dateCreated && task.dateCompleted
-                    ? `Created on: ${new Date(
-                        task.dateCreated
-                      ).toLocaleDateString()} | Completed on: ${new Date(
-                        task.dateCompleted
-                      ).toLocaleDateString()}`
-                    : task.dateCreated
-                    ? `Created on: ${new Date(
-                        task.dateCreated
-                      ).toLocaleDateString()}`
-                    : "No date information available"}
-                </Typography>
-              </Box>
-              <Box
-                className="task-actions"
-                sx={{
-                  position: "absolute",
-                  right: 20,
-                  display: "flex",
-                  gap: 0,
-                  opacity: 0,
-                  transition: "opacity 0.2s ease-in-out",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }}
-              >
-                <IconButton>
-                  <Icon
-                    icon="mdi:edit"
-                    fontSize="medium"
-                    color="textsecondary"
-                  />
-                </IconButton>
-                <IconButton>
-                  <Icon
-                    icon="mdi:delete"
-                    fontSize="medium"
-                    color="textsecondary"
-                  />
-                </IconButton>
-              </Box>
+                    <Typography variant="body2" color="textSecondary">
+                      {task.dateCreated && task.dateCompleted
+                        ? `Created on: ${new Date(
+                            task.dateCreated
+                          ).toLocaleDateString()} | Completed on: ${new Date(
+                            task.dateCompleted
+                          ).toLocaleDateString()}`
+                        : task.dateCreated
+                        ? `Created on: ${new Date(
+                            task.dateCreated
+                          ).toLocaleDateString()}`
+                        : "No date information available"}
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="task-actions"
+                    sx={{
+                      position: "absolute",
+                      right: 20,
+                      display: "flex",
+                      gap: 0,
+                      opacity: 0,
+                      transition: "opacity 0.2s ease-in-out",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  >
+                    <IconButton>
+                      <Icon
+                        icon="mdi:edit"
+                        fontSize="medium"
+                        color="textsecondary"
+                        onClick={() => startEditing(task)}
+                      />
+                    </IconButton>
+                    <IconButton>
+                      <Icon
+                        icon="mdi:delete"
+                        fontSize="medium"
+                        color="textsecondary"
+                        onClick={() => deleteTask(task.id)}
+                      />
+                    </IconButton>
+                  </Box>{" "}
+                </>
+              )}
             </Box>
           ))}
           <Button
