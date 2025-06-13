@@ -48,9 +48,10 @@ const AllTasks = ({
         borderRadius: 2,
         borderColor: "divider",
         marginTop: 4,
-        minHeightheight: "20vh",
+        minHeight: "20vh",
         alignItems: "left",
         justifyContent: "center",
+        bottomPadding: 8,
       }}
     >
       <Typography variant="h5" marginBottom={1}>
@@ -152,6 +153,7 @@ const AllTasks = ({
               justifyContent: "center",
               margin: "0 auto",
               marginTop: 2,
+              marginBottom: 2,
               gap: 2,
             }}
             onClick={clearCompletedTasks}
