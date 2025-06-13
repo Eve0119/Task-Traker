@@ -34,7 +34,9 @@ const FilterTasks = ({
         minHeight: "20vh",
       }}
     >
-      <Typography variant="h5">Filter Tasks</Typography>
+      <Typography variant="h5" fontWeight={600}>
+        Filter Tasks
+      </Typography>
       <TextField
         sx={{ width: "100%" }}
         fullWidth

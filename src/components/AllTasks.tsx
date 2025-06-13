@@ -84,7 +84,7 @@ const AllTasks = ({
         bottomPadding: 8,
       }}
     >
-      <Typography variant="h5" marginBottom={1}>
+      <Typography variant="h5" fontWeight={600} marginBottom={1}>
         {filter === "all"
           ? "All Tasks"
           : filter === "active"

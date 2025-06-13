@@ -30,7 +30,9 @@ const NewTask = ({ onAddTask }: { onAddTask: (taskName: string) => void }) => {
         gap: 2,
       }}
     >
-      <Typography variant="h5">Add New Task</Typography>
+      <Typography variant="h5" fontWeight={600}>
+        Add New Task
+      </Typography>
       <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
         <TextField
           fullWidth
